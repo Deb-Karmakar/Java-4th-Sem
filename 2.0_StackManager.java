@@ -2,9 +2,13 @@ import java.util.Scanner;
 
 class Stack {
     // Array to store stack elements (max size 100 for simplicity)
-    int[] arr = new int[100]; 
-    int top = -1; // -1 means the stack is currently empty
-
+    int arr[]; // Step 1: Just declare the array, don't create it yet!
+    int size;
+    Stack(int x) {
+        this.size = x;
+        this.arr = new int[size]; // Step 2: Create the array HERE, using the user's size
+    }
+    int top = -1; // Pointer to the top of the stack
     // Method to add an element to the stack
     void push(int value) {
         if (top == arr.length - 1) {
@@ -48,8 +52,12 @@ class Stack {
 public class StackManager {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        Stack stack1 = new Stack();
-        Stack stack2 = new Stack();
+        System.out.print("Enter size of Stack 1: ");
+        int n=sc.nextInt();
+        System.out.print("Enter size of Stack 2: ");
+        int m=sc.nextInt();
+        Stack stack1 = new Stack(n);
+        Stack stack2 = new Stack(m);
         
         while (true) {
             System.out.println("\n--- Menu ---");
