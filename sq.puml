@@ -1,0 +1,101 @@
+@startuml
+skinparam maxMessageSize 150
+
+participant ":Student" as Student
+participant ":Professor" as Professor
+participant ":Administrator" as Administrator
+participant ":System" as System
+participant ":Database" as Database
+
+' --- Student Flow ---
+Student -> System : Login (Credentials)
+System -> Database : Verify (credentials)
+Database --> System : Valid
+System --> Student : Grant Access
+
+Student -> System : Request Available Courses
+System -> Database : Fetch Available Courses
+Database --> System : Return Available Courses
+System --> Student : Display Available Courses
+
+Student -> Student : Select Course
+Student -> System : Check Availability of Course
+System -> Database : Check Availability
+Database --> System : Return Availability
+System --> Student : Course Available
+
+Student -> Student : Confirm Registration
+Student -> System : Enroll for Selected Course
+System -> Database : Update Database
+Database --> System : Database Updated Successfully
+System --> Student : Successfully Enrolled in Course
+
+Student -> System : List Enrolled Courses
+System -> Database : Fetch Enrolled Courses
+Database --> System : Return Enrolled Courses
+System --> Student : Display Enrolled Courses
+
+Student -> Student : Select Course
+Student -> Student : Confirm Drop Course
+Student -> System : Drop Selected Course
+System -> Database : Update Database
+Database --> System : Database Updated Successfully
+System --> Student : Course Dropped Successfully
+
+Student -> System : Logout
+System --> Student : Logged out Successfully
+destroy Student
+
+' --- Professor Flow ---
+Professor -> System : Login (credentials)
+System -> Database : Check Credentials
+Database --> System : Valid
+System --> Professor : Grant Access
+
+Professor -> System : Request Enrolled Students
+System -> Database : Fetch Enrolled Students
+Database --> System : Return Enrolled Students
+System --> Professor : Display Enrolled Students
+
+Professor -> Professor : Select Students
+Professor -> System : Manage Selected Enrolled Students
+System -> Database : Update Database
+Database --> System : Database Updated Successfully
+System --> Professor : Successful
+
+Professor -> System : Logout
+System --> Professor : Logged Out Successfully
+destroy Professor
+
+' --- Administrator Flow ---
+Administrator -> System : Login (credentials)
+System -> Database : Check Credentials
+Database --> System : Valid
+System --> Administrator : Logged In Successfully
+
+Administrator -> System : Request All Courses
+System -> Database : Fetch All Courses
+Database --> System : Return All Courses
+System --> Administrator : Display All Courses
+
+Administrator -> System : Fetch New Course Form
+System --> Administrator : Display New Course Form
+
+Administrator -> Administrator : Fill Form
+Administrator -> System : Send Course Details
+System -> System : Check Details
+System -> Database : Update Database
+Database --> System : Database Updated Successfully
+System --> Administrator : New Course Created Successfully
+
+Administrator -> Administrator : Select Professors
+Administrator -> System : Assign Selected Professors
+System -> Database : Update Database
+Database --> System : Database Updated Successfully
+System --> Administrator : Professors assigned Successfully
+
+Administrator -> System : Logout
+System --> Administrator : Logged Out Successfully
+destroy Administrator
+
+@enduml
