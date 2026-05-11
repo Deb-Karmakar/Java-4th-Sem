@@ -28,6 +28,7 @@ class Vehicle {
 class Bus extends Vehicle {
     // Private variable specific to BusI
     private String route_no;
+    
 
     // Constructor for Bus 
     public Bus(String Licence_number, double speed, String color, String owner_name, String route_no) {
