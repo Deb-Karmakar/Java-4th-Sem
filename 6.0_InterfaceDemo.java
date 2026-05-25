@@ -59,16 +59,19 @@ public class InterfaceDemo {
     static void takesFirst(FirstInterface f) {
         System.out.println("\n--- Inside takesFirst method ---");
         f.methodOneA();
+        f.methodOneB();
     }
 
     static void takesSecond(SecondInterface s) {
         System.out.println("\n--- Inside takesSecond method ---");
         s.methodTwoA();
+        s.methodTwoB();
     }
 
     static void takesThird(ThirdInterface t) {
         System.out.println("\n--- Inside takesThird method ---");
         t.methodThreeA();
+        t.methodThreeB();   
     }
 
     static void takesCombined(CombinedInterface c) {
