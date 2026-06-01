@@ -1,0 +1,61 @@
+@startuml
+title Administrator Activity Diagram
+
+|Administrator|
+start
+
+:Login;
+
+|System|
+:Authenticate User;
+
+if (Valid User?) then (Yes)
+
+    |Administrator|
+    :Request Dashboard;
+
+    |System|
+    :Display Bookings Dashboard;
+
+    |Administrator|
+    :Track Food Wastage;
+
+    |System|
+    :Display Wastage Analysis;
+
+    |Administrator|
+    :Generate Reports;
+
+    |System|
+    :Generate &
+    Display Reports;
+
+    |Administrator|
+    :Manage Inventory;
+
+    |System|
+    :Update Inventory;
+
+    |Administrator|
+    :Manage Menu;
+
+    |System|
+    :Update Menu;
+
+    |Administrator|
+    :Logout;
+
+    |System|
+    :Terminate Session;
+
+    stop
+
+else (No)
+
+    :Display Login Error;
+
+    stop
+
+endif
+
+@enduml

@@ -1,1 +1,1 @@
-ArrayCompare
+System.out.println("String: "+containsElement(n,(2,"mango")));

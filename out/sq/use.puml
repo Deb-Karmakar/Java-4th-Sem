@@ -1,0 +1,103 @@
+@startuml
+' Smart Mess Management System - Use Case Diagram
+
+' =============================================
+' Enhanced Styling
+' =============================================
+skinparam shadowing false
+skinparam packageStyle rectangle
+
+skinparam usecase {
+    BackgroundColor #EDF7F6
+    BorderColor #2C8A7A
+    ArrowColor #666666
+}
+
+skinparam actor {
+    BackgroundColor #E3F2FD
+    BorderColor #1565C0
+}
+
+skinparam rectangle {
+    BorderColor #555555
+}
+
+left to right direction
+
+' =============================================
+' Actors
+' =============================================
+actor "Student" as Student
+actor "Mess Administrator" as Admin
+
+' =============================================
+' System Boundary
+' =============================================
+rectangle "Smart Mess Management System" {
+
+    ' Grouping Student actions for visual clarity
+    package "Student Services" {
+        usecase "View Live Menu" as UC_ViewMenu
+        usecase "Pre-book Meal" as UC_Prebook
+        usecase "Customize Meal" as UC_Customize
+        usecase "Select Portion Size" as UC_Portion
+        usecase "View My Bookings" as UC_ViewBookings
+        usecase "Cancel Booking" as UC_Cancel
+        usecase "Submit Feedback" as UC_Feedback
+        usecase "Receive Notifications" as UC_Notifications
+    }
+    
+    ' Grouping Admin actions for visual clarity
+    package "Admin Operations" {
+        usecase "View Bookings Dashboard" as UC_Dashboard
+        usecase "Track Food Wastage" as UC_Wastage
+        usecase "Manage Inventory" as UC_Inventory
+        usecase "Manage Menu" as UC_ManageMenu
+        usecase "Generate Reports" as UC_Reports
+    }
+    
+    ' This hidden line forces the Admin package to stay strictly BELOW the Student package
+    UC_Notifications -[hidden]-> UC_Dashboard
+}
+
+' =============================================
+' Primary Relationships - Student
+' =============================================
+Student --> UC_ViewMenu
+Student --> UC_Prebook
+Student --> UC_ViewBookings
+Student --> UC_Feedback
+Student --> UC_Notifications
+
+' =============================================
+' Primary Relationships - Administrator
+' =============================================
+Admin --> UC_Dashboard
+Admin --> UC_Wastage
+Admin --> UC_Inventory
+Admin --> UC_ManageMenu
+Admin --> UC_Reports
+
+' =============================================
+' Internal Use Case Dependencies (Includes/Extends)
+' =============================================
+' Pre-booking flow
+UC_Prebook ..> UC_ViewMenu : <<include>>
+UC_Prebook ..> UC_Customize : <<include>>
+UC_Prebook ..> UC_Portion : <<include>>
+UC_Customize ..> UC_Portion : <<include>>
+
+' Booking Management (Cancel extends View Bookings)
+UC_Cancel ..> UC_ViewBookings : <<extend>>
+
+' Feedback after consuming meal (Feedback extends Pre-book)
+UC_Feedback ..> UC_Prebook : <<extend>>
+
+' Analytics & Reporting
+UC_Dashboard ..> UC_Reports : <<include>>
+UC_Wastage ..> UC_Reports : <<include>>
+
+' Menu management affects live menu (Manage extends View Menu)
+UC_ManageMenu ..> UC_ViewMenu : <<extend>>
+
+@enduml

@@ -1,0 +1,43 @@
+@startuml
+title Student Collaboration Diagram
+
+object Student
+object System
+object Database
+
+Student -> System : 1. Login(credentials)
+System -> Database : 2. Verify Credentials
+Database -> System : 3. Validation Result
+System -> Student : 4. Login Successful
+
+Student -> System : 5. Request Live Menu
+System -> Database : 6. Retrieve Menu
+Database -> System : 7. Menu Data
+System -> Student : 8. Display Menu
+
+Student -> System : 9. Pre-book Meal
+Student -> System : 10. Customize Meal
+Student -> System : 11. Select Portion Size
+
+System -> Database : 12. Save Booking
+Database -> System : 13. Booking Confirmation
+System -> Student : 14. Booking Successful
+
+System -> Student : 15. Send Notification
+
+Student -> System : 16. View My Bookings
+System -> Database : 17. Retrieve Booking Data
+Database -> System : 18. Booking Details
+System -> Student : 19. Display Bookings
+
+Student -> System : 20. Submit Feedback
+System -> Database : 21. Store Feedback
+Database -> System : 22. Feedback Stored
+System -> Student : 23. Feedback Submitted
+
+Student -> System : 24. Logout
+System -> Database : 25. Clear Session
+Database -> System : 26. Logout Confirmation
+System -> Student : 27. Logged Out Successfully
+
+@enduml

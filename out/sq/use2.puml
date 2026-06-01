@@ -1,0 +1,73 @@
+@startuml
+skinparam shadowing false
+skinparam packageStyle rectangle
+
+skinparam usecase {
+    BackgroundColor #EDF7F6
+    BorderColor #2C8A7A
+    ArrowColor #666666
+}
+
+skinparam actor {
+    BackgroundColor #E3F2FD
+    BorderColor #1565C0
+}
+
+skinparam rectangle {
+    BorderColor #555555
+}
+
+left to right direction
+
+actor "Student" as Student
+actor "Mess Administrator" as Admin
+
+rectangle "Smart Mess Management System" {
+
+    package "Student Services" {
+        usecase "View Live Menu"        as UC_ViewMenu
+        usecase "Pre-book Meal"         as UC_Prebook
+        usecase "Customize Meal"        as UC_Customize
+        usecase "Select Portion Size"   as UC_Portion
+        usecase "View My Bookings"      as UC_ViewBookings
+        usecase "Cancel Booking"        as UC_Cancel
+        usecase "Submit Feedback"       as UC_Feedback
+        usecase "Receive Notifications" as UC_Notifications
+    }
+
+    package "Admin Operations" {
+        usecase "View Bookings Dashboard" as UC_Dashboard
+        usecase "Track Food Wastage"      as UC_Wastage
+        usecase "Manage Inventory"        as UC_Inventory
+        usecase "Manage Menu"             as UC_ManageMenu
+        usecase "Generate Reports"        as UC_Reports
+    }
+}
+
+' ✅ FIX: Moved OUTSIDE the rectangle block
+UC_Notifications -[hidden]-> UC_Dashboard
+
+' Student Associations
+Student --> UC_ViewMenu
+Student --> UC_Prebook
+Student --> UC_ViewBookings
+Student --> UC_Cancel
+Student --> UC_Feedback
+Student --> UC_Notifications
+
+' Admin Associations
+Admin --> UC_Dashboard
+Admin --> UC_Wastage
+Admin --> UC_Inventory
+Admin --> UC_ManageMenu
+Admin --> UC_Reports
+
+' Use Case Dependencies
+UC_Prebook ..> UC_ViewMenu    : <<include>>
+UC_Customize ..> UC_Prebook   : <<extend>>
+UC_Customize ..> UC_Portion   : <<include>>
+UC_Cancel ..> UC_ViewBookings : <<extend>>
+UC_Wastage ..> UC_Reports     : <<include>>
+UC_Reports ..> UC_Dashboard   : <<extend>>
+
+@enduml

@@ -1,0 +1,45 @@
+@startuml
+title Student Sequence Diagram
+
+participant ":Student" as Student
+participant ":System" as System
+participant ":Database" as Database
+
+Student -> System : Login(credentials)
+System -> Database : Verify Credentials
+Database --> System : Valid
+System --> Student : Login Successful
+
+Student -> System : Request Live Menu
+System -> Database : Fetch Menu
+Database --> System : Menu Data
+System --> Student : Display Live Menu
+
+Student -> System : Pre-book Meal
+System --> Student : Show Customization Options
+
+Student -> System : Customize Meal
+Student -> System : Select Portion Size
+
+System -> Database : Save Booking
+Database --> System : Booking Saved
+System --> Student : Booking Confirmation
+
+System --> Student : Send Real-Time Notification
+
+Student -> System : View My Bookings
+System -> Database : Fetch Booking Details
+Database --> System : Booking Data
+System --> Student : Display Bookings
+
+Student -> System : Submit Feedback
+System -> Database : Store Feedback
+Database --> System : Feedback Saved
+System --> Student : Feedback Submitted
+
+Student -> System : Logout
+System --> Student : Logged Out Successfully
+
+destroy Student
+
+@enduml

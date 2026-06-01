@@ -1,0 +1,52 @@
+@startuml
+title Student Activity Diagram
+
+|Student|
+start
+
+:Login;
+
+|System|
+:Authenticate User;
+
+if (Valid User?) then (Yes)
+
+    :Display Menu;
+
+    |Student|
+    :Request Meal Booking;
+
+    |System|
+    :Process Booking;
+
+    :Send Confirmation;
+
+    |Student|
+    :View Bookings;
+
+    |System|
+    :Display Booking Details;
+
+    |Student|
+    :Submit Feedback;
+
+    |System|
+    :Confirm Feedback Submission;
+
+    |Student|
+    :Logout;
+
+    |System|
+    :Terminate Session;
+
+    stop
+
+else (No)
+
+    :Display Login Error;
+
+    stop
+
+endif
+
+@enduml

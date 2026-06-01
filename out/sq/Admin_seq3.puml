@@ -1,0 +1,43 @@
+@startuml
+title Administrator Sequence Diagram
+
+participant ":Administrator" as Admin
+participant ":System" as System
+participant ":Database" as Database
+
+Admin -> System : Login(credentials)
+System -> Database : Verify Credentials
+Database --> System : Valid
+System --> Admin : Login Successful
+
+Admin -> System : View Bookings Dashboard
+System -> Database : Retrieve Booking Statistics
+Database --> System : Statistics Data
+System --> Admin : Display Dashboard
+
+Admin -> System : Track Food Wastage
+System -> Database : Retrieve Consumption Data
+Database --> System : Wastage Data
+System --> Admin : Display Wastage Analysis
+
+Admin -> System : Generate Reports
+System -> Database : Fetch Analytics Data
+Database --> System : Report Data
+System --> Admin : Display Reports
+
+Admin -> System : Manage Inventory
+System -> Database : Update Inventory
+Database --> System : Inventory Updated
+System --> Admin : Inventory Update Successful
+
+Admin -> System : Manage Menu
+System -> Database : Update Menu
+Database --> System : Menu Updated
+System --> Admin : Menu Update Successful
+
+Admin -> System : Logout
+System --> Admin : Logged Out Successfully
+
+destroy Admin
+
+@enduml

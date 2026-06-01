@@ -1,0 +1,74 @@
+@startuml
+title Smart Mess Management System - Class Diagram
+
+skinparam classAttributeIconSize 0
+
+class Student {
+    studentId : Integer
+    name : String
+    email : String
+    bookings : List<Booking>
+
+    viewMenu() : void
+    preBookMeal() : void
+    viewBookings() : List<Booking>
+    submitFeedback() : void
+}
+
+class Meal {
+    mealId : Integer
+    mealName : String
+    mealType : String
+    availableQuantity : Integer
+
+    updateMenu() : void
+    checkAvailability() : boolean
+    getMealDetails() : String
+}
+
+class Booking {
+    bookingId : Integer
+    bookingDate : Date
+    portionSize : String
+    status : String
+
+    createBooking() : void
+    cancelBooking() : void
+    getBookingDetails() : String
+}
+
+class Administrator {
+    adminId : Integer
+    name : String
+    role : String
+
+    manageMenu() : void
+    manageInventory() : void
+    generateReports() : void
+    trackFoodWastage() : void
+}
+
+class SmartMessSystem {
+    students : List<Student>
+    meals : List<Meal>
+    bookings : List<Booking>
+    administrators : List<Administrator>
+
+    authenticateUser() : boolean
+    processBooking() : void
+    sendNotification() : void
+    generateAnalytics() : void
+}
+
+Student "1" -- "0..*" Booking : makes
+Booking "*" -- "1" Meal : contains
+
+SmartMessSystem o-- Student : maintains
+SmartMessSystem o-- Meal : maintains
+SmartMessSystem o-- Booking : maintains
+SmartMessSystem o-- Administrator : maintains
+
+Administrator --> Meal : manages
+Administrator --> Booking : monitors
+
+@enduml
